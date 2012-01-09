@@ -3,5 +3,5 @@ require 'bundler'
 
 Bundler.require(:default)
 
-require 'dbpedialite'
+require 'mqtt-http-bridge'
 run Sinatra::Application
