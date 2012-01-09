@@ -1,9 +1,28 @@
 <html>
-  <head>
-    <title>mqtt-http-bridge.rb</title>
-  </head>
-  <body>
-   <h1>mqtt-http-bridge.rb</h1>
-   <%= yield %>
-  </body>
+<head>
+  <title>mqtt-http-bridge.rb</title>
+</head>
+
+<body>
+<h1>mqtt-http-bridge.rb</h1>
+
+<%= yield %>
+
+<address>
+  <div>
+    Written by:
+    <a href="http://www.aelius.com/njh/">Nicholas Humfrey</a>
+  </div>
+  <div>
+    Source code: <%= link_to('http://github.com/njh/mqtt-http-bridge') %>
+  </div>
+  <div>
+    Powered by:
+    <a href="http://heroku.com/">heroku</a>,
+    <a href="http://www.sinatrarb.com/">Sinatra</a>,
+    <a href="http://github.com/njh/ruby-mqtt/">ruby-mqtt</a>
+  </div>
+</address>
+
+</body>
 </html>
