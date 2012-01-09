@@ -3,5 +3,5 @@ require 'bundler'
 
 Bundler.require(:default)
 
-require 'mqtt-http-bridge'
+require './mqtt-http-bridge'
 run Sinatra::Application
