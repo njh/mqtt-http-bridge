@@ -1,10 +1,10 @@
 <p>
- Server: <%= link_to(MQTT_SERVER, "http://#{MQTT_SERVER}") %>
+ Server: <%= link_to(MQTT_SERVER, "http://#{MQTT_SERVER}/") %>
 </p>
 
 <h2>Topics</h2>
 <ul>
 <% @topics.each do |topic| %>
-  <li><a href="/<%= topic %>"><%= topic %></a></li>
+  <li><%= link_to(topic) %></li>
 <% end %>
 </ul>
