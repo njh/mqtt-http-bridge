@@ -64,8 +64,19 @@ class MqttHttpBridge < Sinatra::Base
   end
 
   helpers do
-    include Rack::Utils
-    alias_method :h, :escape_html
+    # Escape ampersands, brackets and quotes to their HTML/XML entities.
+    # (Rack::Utils.escape_html is overly enthusiastic)
+    def h(string)
+      mapping = {
+        "&" => "&amp;",
+        "<" => "&lt;",
+        ">" => "&gt;",
+        "'" => "&#x27;",
+        '"' => "&quot;"
+      }
+      pattern = /#{Regexp.union(*mapping.keys)}/n
+      string.to_s.gsub(pattern){|c| mapping[c] }
+    end
 
     def link_to(title, url=nil, attr={})
       url = title if url.nil?
