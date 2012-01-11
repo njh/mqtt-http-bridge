@@ -9,7 +9,8 @@ set :environment, :test
 describe MqttHttpBridge do
   include Rack::Test::Methods
 
-  TEST_MESSAGE = "#{Time.now} - Test Message"
+  TEST_MESSAGE_1 = "#{Time.now} - Test Message 1"
+  TEST_MESSAGE_2 = "#{Time.now} - Test Message 2"
 
   def app
     MqttHttpBridge
@@ -22,7 +23,25 @@ describe MqttHttpBridge do
 
   context "POSTing to a simple topic name" do
     before :all do
-      post '/test', TEST_MESSAGE
+      post '/test', TEST_MESSAGE_1
+    end
+
+    it "should be successful" do
+      last_response.should be_ok
+    end
+
+    it "should have a response of type text/plain" do
+      last_response.content_type.should == 'text/plain;charset=utf-8'
+    end
+
+    it "should have a response body of 'OK'" do
+      last_response.body.should == 'OK'
+    end
+  end
+
+  context "POSTing to a topic with a slash at the start" do
+    before :all do
+      post '/%2Ftest', TEST_MESSAGE_2
     end
 
     it "should be successful" do
@@ -52,7 +71,25 @@ describe MqttHttpBridge do
     end
 
     it "should have a response body of 'OK'" do
-      last_response.body.should == TEST_MESSAGE
+      last_response.body.should == TEST_MESSAGE_1
+    end
+  end
+
+  context "GETing a topic name with a slash at the start" do
+    before :all do
+      get '/%2Ftest'
+    end
+
+    it "should be successful" do
+      last_response.should be_ok
+    end
+
+    it "should have a response of type text/plain" do
+      last_response.content_type.should == 'text/plain;charset=utf-8'
+    end
+
+    it "should have a response body of 'OK'" do
+      last_response.body.should == TEST_MESSAGE_2
     end
   end
 
@@ -103,8 +140,12 @@ describe MqttHttpBridge do
       last_response.body.should =~ %r[<li><a href="test">test</a></li>]
     end
 
+    it "should contain a link to the '/test' topic" do
+      last_response.body.should =~ %r[<li><a href="%2Ftest">/test</a></li>]
+    end
+
     it "should contain a link to the '$SYS/broker/version' topic" do
-      last_response.body.should =~ %r[<li><a href="\$SYS/broker/version">\$SYS/broker/version</a></li>]
+      last_response.body.should =~ %r[<li><a href="%24SYS%2Fbroker%2Fversion">\$SYS/broker/version</a></li>]
     end
   end
 

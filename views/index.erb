@@ -5,6 +5,6 @@
 <h2>Topics</h2>
 <ul>
 <% @topics.each do |topic| %>
-  <li><%= link_to(topic) %></li>
+  <li><%= link_to(topic, escape(topic)) %></li>
 <% end %>
 </ul>
