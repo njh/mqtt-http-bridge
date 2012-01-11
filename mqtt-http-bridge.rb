@@ -60,7 +60,9 @@ class MqttHttpBridge < Sinatra::Base
   end
 
   def topic
-    request.path_info.slice(1..-1)
+    unescape(
+      request.path_info.slice(1..-1)
+    )
   end
 
   helpers do

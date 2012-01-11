@@ -8,7 +8,7 @@ set :environment, :test
 
 describe MqttHttpBridge do
   include Rack::Test::Methods
-  
+
   TEST_MESSAGE = "#{Time.now} - Test Message"
 
   def app
@@ -37,7 +37,7 @@ describe MqttHttpBridge do
       last_response.body.should == 'OK'
     end
   end
-  
+
   context "GETing a simple topic name" do
     before :all do
       get '/test'
@@ -53,6 +53,24 @@ describe MqttHttpBridge do
 
     it "should have a response body of 'OK'" do
       last_response.body.should == TEST_MESSAGE
+    end
+  end
+
+  context "GETing a topic with a space in the name" do
+    before :all do
+      get '$SYS/broker/heap/current%20size'
+    end
+
+    it "should be successful" do
+      last_response.should be_ok
+    end
+
+    it "should have a response of type text/plain" do
+      last_response.content_type.should == 'text/plain;charset=utf-8'
+    end
+
+    it "should have a response body of 'N bytes'" do
+      last_response.body.should =~ %r[^\d+ bytes$]
     end
   end
 
