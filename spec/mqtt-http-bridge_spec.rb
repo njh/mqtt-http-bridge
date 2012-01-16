@@ -149,4 +149,33 @@ describe MqttHttpBridge do
     end
   end
 
+
+  context "DELETEing a topic" do
+    before :all do
+      @post_response = post('/deleteme', TEST_MESSAGE_1)
+      @get1_response = get('/deleteme')
+      @delete_response = delete('/deleteme')
+      @get2_response = get('/deleteme')
+    end
+
+    it "should successfully create the topic to be deleted" do
+      @post_response.should be_ok
+      @post_response.body.should == 'OK'
+    end
+
+    it "should successfully GET back the topic to be deleted" do
+      @get1_response.should be_ok
+      @get1_response.body.should == TEST_MESSAGE_1
+    end
+
+    it "should successfully delete the topic" do
+      @delete_response.should be_ok
+      @delete_response.body.should == 'OK'
+    end
+
+    it "should return 404 after deleting the topic" do
+      @get2_response.should be_not_found
+    end
+  end
+
 end

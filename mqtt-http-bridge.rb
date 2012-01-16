@@ -105,4 +105,10 @@ class MqttHttpBridge < Sinatra::Base
     mqtt_publish(topic, request.body.read)
     "OK"
   end
+
+  delete // do
+    content_type('text/plain')
+    mqtt_publish(topic, '')
+    "OK"
+  end
 end
