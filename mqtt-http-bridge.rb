@@ -6,9 +6,8 @@
 #
 
 require 'rubygems'
-require 'mqtt/client'
+require 'mqtt'
 require 'sinatra'
-
 
 class MqttHttpBridge < Sinatra::Base
   MQTT_SERVER='test.mosquitto.org'
@@ -16,7 +15,7 @@ class MqttHttpBridge < Sinatra::Base
 
   def mqtt_get(topic)
     mqtt = MQTT::Client.new(MQTT_SERVER)
-    mqtt.clean_start = true
+    mqtt.clean_session = true
     mqtt.connect do
       mqtt.subscribe(topic)
       begin
@@ -32,7 +31,7 @@ class MqttHttpBridge < Sinatra::Base
 
   def mqtt_topics
     mqtt = MQTT::Client.new(MQTT_SERVER)
-    mqtt.clean_start = true
+    mqtt.clean_session = true
 
     topics = []
     mqtt.connect do
@@ -53,7 +52,7 @@ class MqttHttpBridge < Sinatra::Base
 
   def mqtt_publish(topic, payload)
     mqtt = MQTT::Client.new(MQTT_SERVER)
-    mqtt.clean_start = true
+    mqtt.clean_session = true
     mqtt.connect do
       mqtt.publish(topic, payload, retain=true)
     end

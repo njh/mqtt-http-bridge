@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem 'sinatra'
-gem 'mqtt'
+gem 'mqtt', '>=0.0.5'
 
 group :development do
   gem 'shotgun'
