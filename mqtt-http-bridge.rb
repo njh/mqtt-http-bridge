@@ -14,13 +14,11 @@ class MqttHttpBridge < Sinatra::Base
   MQTT_TIMEOUT=1.0
 
   def mqtt_get(topic)
-    mqtt = MQTT::Client.new(MQTT_SERVER)
-    mqtt.clean_session = true
-    mqtt.connect do
-      mqtt.subscribe(topic)
+    MQTT::Client.connect(MQTT_SERVER) do |client|
+      client.subscribe(topic)
       begin
         timeout(MQTT_TIMEOUT) do
-          topic,message = mqtt.get
+          topic,message = client.get
           return message
         end
       rescue Timeout::Error
@@ -30,32 +28,18 @@ class MqttHttpBridge < Sinatra::Base
   end
 
   def mqtt_topics
-    mqtt = MQTT::Client.new(MQTT_SERVER)
-    mqtt.clean_session = true
-
     topics = []
-    mqtt.connect do
-      mqtt.subscribe('#')
-      mqtt.subscribe('$SYS/#')
+    MQTT::Client.connect(MQTT_SERVER) do |client|
+      client.subscribe('#')
+      client.subscribe('$SYS/#')
       begin
         timeout(MQTT_TIMEOUT) do
-          loop do
-            topic,message = mqtt.get
-            topics << topic
-          end
+          client.get { |topic,message| topics << topic }
         end
       rescue Timeout::Error
       end
     end
     return topics
-  end
-
-  def mqtt_publish(topic, payload)
-    mqtt = MQTT::Client.new(MQTT_SERVER)
-    mqtt.clean_session = true
-    mqtt.connect do
-      mqtt.publish(topic, payload, retain=true)
-    end
   end
 
   def topic
@@ -101,13 +85,17 @@ class MqttHttpBridge < Sinatra::Base
 
   post // do
     content_type('text/plain')
-    mqtt_publish(topic, request.body.read)
+    MQTT::Client.connect(MQTT_SERVER) do |client|
+      client.publish(topic, request.body.read, retain=true)
+    end
     "OK"
   end
 
   delete // do
     content_type('text/plain')
-    mqtt_publish(topic, '')
+    MQTT::Client.connect(MQTT_SERVER) do |client|
+      client.publish(topic, '', retain=true)
+    end
     "OK"
   end
 end
