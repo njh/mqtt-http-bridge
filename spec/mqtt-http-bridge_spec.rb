@@ -21,41 +21,65 @@ describe MqttHttpBridge do
     app.disable :show_exceptions
   end
 
+  context "PUTing to a simple topic name" do
+    before :all do
+      put '/test', TEST_MESSAGE_1
+    end
+
+    it "should be successful" do
+      last_response.should be_ok
+    end
+
+    it "should have a response of type text/plain" do
+      last_response.content_type.should == 'text/plain;charset=utf-8'
+    end
+
+    it "should have a response body of 'OK'" do
+      last_response.body.should == 'OK'
+    end
+  end
+
+  context "PUTing to a topic with a slash at the start" do
+    before :all do
+      put '/%2Ftest', TEST_MESSAGE_2
+    end
+
+    it "should be successful" do
+      last_response.should be_ok
+    end
+
+    it "should have a response of type text/plain" do
+      last_response.content_type.should == 'text/plain;charset=utf-8'
+    end
+
+    it "should have a response body of 'OK'" do
+      last_response.body.should == 'OK'
+    end
+  end
+
   context "POSTing to a simple topic name" do
     before :all do
-      post '/test', TEST_MESSAGE_1
+      @put_response = put('/test', TEST_MESSAGE_1)
+      @post_response = post('/test', TEST_MESSAGE_2)
+      @get_response = get('/test')
     end
 
-    it "should be successful" do
-      last_response.should be_ok
+    it "should successfully publish a retained message to topic using PUT" do
+      @put_response.should be_ok
+      @put_response.body.should == 'OK'
     end
 
-    it "should have a response of type text/plain" do
-      last_response.content_type.should == 'text/plain;charset=utf-8'
+    it "should successfully publish a non-retained message to topic using POST" do
+      @post_response.should be_ok
+      @post_response.body.should == 'OK'
     end
 
-    it "should have a response body of 'OK'" do
-      last_response.body.should == 'OK'
+    it "should successfully GET the retained message afterwards" do
+      @get_response.should be_ok
+      @get_response.body.should == TEST_MESSAGE_1
     end
   end
 
-  context "POSTing to a topic with a slash at the start" do
-    before :all do
-      post '/%2Ftest', TEST_MESSAGE_2
-    end
-
-    it "should be successful" do
-      last_response.should be_ok
-    end
-
-    it "should have a response of type text/plain" do
-      last_response.content_type.should == 'text/plain;charset=utf-8'
-    end
-
-    it "should have a response body of 'OK'" do
-      last_response.body.should == 'OK'
-    end
-  end
 
   context "GETing a simple topic name" do
     before :all do
@@ -152,15 +176,15 @@ describe MqttHttpBridge do
 
   context "DELETEing a topic" do
     before :all do
-      @post_response = post('/deleteme', TEST_MESSAGE_1)
+      @put_response = put('/deleteme', TEST_MESSAGE_1)
       @get1_response = get('/deleteme')
       @delete_response = delete('/deleteme')
       @get2_response = get('/deleteme')
     end
 
     it "should successfully create the topic to be deleted" do
-      @post_response.should be_ok
-      @post_response.body.should == 'OK'
+      @put_response.should be_ok
+      @put_response.body.should == 'OK'
     end
 
     it "should successfully GET back the topic to be deleted" do

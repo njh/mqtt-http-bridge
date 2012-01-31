@@ -87,6 +87,14 @@ class MqttHttpBridge < Sinatra::Base
   post // do
     content_type('text/plain')
     MQTT::Client.connect(MQTT_SERVER) do |client|
+      client.publish(topic, request.body.read, retain=false)
+    end
+    "OK"
+  end
+
+  put // do
+    content_type('text/plain')
+    MQTT::Client.connect(MQTT_SERVER) do |client|
       client.publish(topic, request.body.read, retain=true)
     end
     "OK"

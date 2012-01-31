@@ -12,9 +12,13 @@ To get a retained value for a topic:
 
     curl http://test-mosquitto.heroku.com/test
 
-To publish to a topic:
+To publish to a topic (non-retained):
 
     curl -X POST --data-binary "Hello World" http://test-mosquitto.heroku.com/test
+
+To publish to a topic (retained):
+
+    curl -X PUT --data-binary "Hello World" http://test-mosquitto.heroku.com/test
 
 To delete the retained value for a topic:
 
