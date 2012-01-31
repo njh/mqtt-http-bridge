@@ -9,6 +9,7 @@ GEM
     rack-test (0.6.1)
       rack (>= 1.0)
     rake (0.9.2.2)
+    rdiscount (1.6.8)
     rspec (2.7.0)
       rspec-core (~> 2.7.0)
       rspec-expectations (~> 2.7.0)
@@ -32,6 +33,7 @@ DEPENDENCIES
   mqtt (>= 0.0.7)
   rack-test
   rake
+  rdiscount
   rspec (>= 2.7.0)
   shotgun
   sinatra

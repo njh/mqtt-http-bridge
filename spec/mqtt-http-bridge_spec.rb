@@ -132,8 +132,8 @@ describe MqttHttpBridge do
       last_response.body.should =~ %r[<h1>mqtt-http-bridge.rb</h1>]
     end
 
-    it "should contain an link to the server" do
-      last_response.body.should =~ %r[<a href="http://test.mosquitto.org/">test.mosquitto.org</a>]
+    it "should contain the text from the README" do
+      last_response.body.should =~ %r[This simple web application provides a bridge between HTTP]
     end
 
     it "should contain a link to the 'test' topic" do

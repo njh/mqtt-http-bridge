@@ -1,8 +1,6 @@
-<p>
- Server: <%= link_to(MQTT_SERVER, "http://#{MQTT_SERVER}/") %>
-</p>
+<%= @readme.to_html %>
 
-<h2>Topics</h2>
+<h2>List of Topics</h2>
 <ul>
 <% @topics.each do |topic| %>
   <li><%= link_to(topic, escape(topic)) %></li>
