@@ -1,0 +1,89 @@
+body
+{
+  font: normal 9pt "lucida grande", helvetica, arial, sans-serif;
+  text-align: left;
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+abbr  { border: none; }
+cite  { font-style: normal; }
+a img { border: none; padding: 0; margin: 0; }
+
+
+/*--------------------------------------------------------------
+ Content
+ --------------------------------------------------------------*/
+
+#content {}
+
+#content p {
+  line-height: 15px;
+  margin: 0 0 1.2em 0.5em;
+}
+
+#content ul,
+#content ol {
+  margin: 1em;
+  padding: 0;
+}
+
+#content ul {
+  list-style-type: square;
+}
+
+#content li {
+  line-height: 15px;
+  margin: 0 0 0 2em;
+  padding: 0;
+}
+
+#content blockquote {
+  color: #555;
+  border-left: 5px solid #ccc;
+  margin: 1.3em 1em;
+  padding: 0 1em;
+}
+
+#content code {
+  font: normal 12px monaco "lucida console", "courier new", courier, monospace;
+}
+
+#content pre {
+  color: #63FF00;
+  background: #000;
+  overflow: auto;
+  font: normal 12px monaco "lucida console", "courier new", courier, monospace;
+  margin: 1em 1em 1.5em 1em;
+  padding: 6px;
+}
+
+#content a:link,  a:visited { color: #930; }
+#content a:hover, a:active  { color: #fff; background: #000; }
+
+
+/*--------------------------------------------------------------
+ Footer
+ --------------------------------------------------------------*/
+
+#footer
+{
+  height: 40px;
+  margin: 10px 0 0;
+  padding: 10px 0 0;
+  clear: both;
+  border-top: 1px solid #ccc;
+  font-size: 90%;
+}
+
+#footer .links a:link,
+#footer .links a:visited {
+  color: #000;
+}
+
+#footer .links a:hover,
+#footer .links a:active {
+  color: #fff;
+  background: #000;
+}
