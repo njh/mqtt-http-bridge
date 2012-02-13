@@ -2,8 +2,8 @@ mqtt-http-bridge.rb
 ===================
 
 This simple web application provides a bridge between HTTP and [MQTT] using 
-a [REST]ish interface. It is possible to GET, POST and DELETE retained messages on a
-remote MQTT server.
+a [REST]ish interface. It is possible to GET, POST, PUT and DELETE retained messages 
+on a remote MQTT server.
 
 Examples using curl
 -------------------
