@@ -19,6 +19,7 @@ class MqttHttpBridge < Sinatra::Base
       begin
         timeout(MQTT_TIMEOUT) do
           topic,message = client.get
+          client.disconnect
           return message
         end
       rescue Timeout::Error
