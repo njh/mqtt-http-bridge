@@ -10,11 +10,15 @@ require 'mqtt'
 require 'sinatra'
 
 class MqttHttpBridge < Sinatra::Base
-  MQTT_SERVER='test.mosquitto.org'
-  MQTT_TIMEOUT=1.0
+  MQTT_TIMEOUT = 1.0
+  MQTT_OPTS = {
+    :remote_host => 'test.mosquitto.org',
+    :keep_alive => 2,
+    :clean_session => true
+  }
 
   def mqtt_get(topic)
-    MQTT::Client.connect(MQTT_SERVER) do |client|
+    MQTT::Client.connect(MQTT_OPTS) do |client|
       client.subscribe(topic)
       begin
         timeout(MQTT_TIMEOUT) do
@@ -30,7 +34,7 @@ class MqttHttpBridge < Sinatra::Base
 
   def mqtt_topics
     topics = []
-    MQTT::Client.connect(MQTT_SERVER) do |client|
+    MQTT::Client.connect(MQTT_OPTS) do |client|
       client.subscribe('#')
       client.subscribe('$SYS/#')
       begin
@@ -87,7 +91,7 @@ class MqttHttpBridge < Sinatra::Base
 
   post // do
     content_type('text/plain')
-    MQTT::Client.connect(MQTT_SERVER) do |client|
+    MQTT::Client.connect(MQTT_OPTS) do |client|
       client.publish(topic, request.body.read, retain=false)
     end
     "OK"
@@ -95,7 +99,7 @@ class MqttHttpBridge < Sinatra::Base
 
   put // do
     content_type('text/plain')
-    MQTT::Client.connect(MQTT_SERVER) do |client|
+    MQTT::Client.connect(MQTT_OPTS) do |client|
       client.publish(topic, request.body.read, retain=true)
     end
     "OK"
@@ -103,7 +107,7 @@ class MqttHttpBridge < Sinatra::Base
 
   delete // do
     content_type('text/plain')
-    MQTT::Client.connect(MQTT_SERVER) do |client|
+    MQTT::Client.connect(MQTT_OPTS) do |client|
       client.publish(topic, '', retain=true)
     end
     "OK"
