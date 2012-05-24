@@ -49,5 +49,5 @@ To delete the retained value for a topic:
 
 
 
-[MQTT]:    http://mqtt.org/
+[MQTT]:    http://en.wikipedia.org/wiki/MQ_Telemetry_Transport
 [REST]:    http://en.wikipedia.org/wiki/Representational_state_transfer
