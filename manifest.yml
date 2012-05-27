@@ -1,0 +1,13 @@
+--- 
+applications: 
+  .: 
+    name: m2m-eclipse
+    instances: 1
+    framework: 
+      name: rack
+      info: 
+        exec: 
+        description: Rack Application
+        mem: 128M
+    url: ${name}.${target-base}
+    mem: 128M
