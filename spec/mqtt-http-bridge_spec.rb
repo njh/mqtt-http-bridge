@@ -153,7 +153,7 @@ describe MqttHttpBridge do
     end
 
     it "should contain a page title" do
-      last_response.body.should =~ %r[<h1>mqtt-http-bridge.rb</h1>]
+      last_response.body.should =~ %r[<h1>HTTP to MQTT Bridge for (.+)</h1>]
     end
 
     it "should contain the text from the README" do

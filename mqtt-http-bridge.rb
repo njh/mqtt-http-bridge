@@ -79,7 +79,6 @@ class MqttHttpBridge < Sinatra::Base
 
   get '/' do
     headers 'Cache-Control' => 'public,max-age=60'
-    @readme = RDiscount.new(File.read(File.join(File.dirname(__FILE__), 'README.md')))
     @topics = mqtt_topics.sort
     erb :index
   end

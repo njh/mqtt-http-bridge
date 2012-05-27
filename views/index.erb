@@ -1,4 +1,25 @@
-<%= @readme.to_html %>
+<% @title = "HTTP to MQTT Bridge for #{MQTT_OPTS[:remote_host]}" %>
+
+<p>This simple web application provides a bridge between HTTP and <a href="http://en.wikipedia.org/wiki/MQ_Telemetry_Transport">MQTT</a> using
+a <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a>ish interface. It is possible to GET, POST, PUT and DELETE retained messages on the remote MQTT server.</p>
+
+<h2>Examples using curl</h2>
+
+<p>To get a retained value for a topic:</p>
+
+<pre><code>curl http://<%= request.host_with_port %>/test</code></pre>
+
+<p>To publish to a topic (retained):</p>
+
+<pre><code>curl -X PUT --data-binary "Hello World" http://<%= request.host_with_port %>/test</code></pre>
+
+<p>To publish to a topic (non-retained):</p>
+
+<pre><code>curl -X POST --data-binary "Hello World" http://<%= request.host_with_port %>/test</code></pre>
+
+<p>To delete the retained value for a topic:</p>
+
+<pre><code>curl -X DELETE http://<%= request.host_with_port %>/test</code></pre>
 
 <h2>List of Topics</h2>
 <ul>

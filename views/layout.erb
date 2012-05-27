@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>mqtt-http-bridge.rb</title>
+  <title><%= @title %></title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <link type="text/css" rel="stylesheet" href="/css/stylesheet.css" />
 </head>
@@ -8,6 +8,7 @@
 <body>
 
 <div id="content">
+<h1><%= @title %></h1>
 <%= yield %>
 </div>
 
@@ -21,8 +22,7 @@
   </div>
   <div>
     Powered by:
-    <a href="http://heroku.com/">heroku</a>,
-    <a href="http://www.sinatrarb.com/">Sinatra</a>,
+    <a href="http://www.sinatrarb.com/">Sinatra</a> and 
     <a href="http://github.com/njh/ruby-mqtt/">ruby-mqtt</a>
   </div>
 </div>
