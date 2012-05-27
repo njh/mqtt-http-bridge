@@ -2,6 +2,7 @@ source "http://rubygems.org"
 
 gem 'sinatra'
 gem 'mqtt', '>=0.0.7'
+gem 'thin'
 
 group :development do
   gem 'shotgun'
