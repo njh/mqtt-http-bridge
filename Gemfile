@@ -1,4 +1,7 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
+
+# Note: also see .rbenv-version
+ruby "1.9.3"
 
 gem 'sinatra'
 gem 'mqtt', '>=0.0.7'
