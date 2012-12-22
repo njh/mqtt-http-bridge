@@ -35,8 +35,8 @@ class MqttHttpBridge < Sinatra::Base
   def mqtt_topics
     topics = []
     MQTT::Client.connect(MQTT_OPTS) do |client|
-      client.subscribe('#')
       client.subscribe('$SYS/#')
+      client.subscribe('#')
       begin
         timeout(MQTT_TIMEOUT) do
           client.get { |topic,message| topics << topic }
