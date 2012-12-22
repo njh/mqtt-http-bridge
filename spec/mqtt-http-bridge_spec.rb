@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'mqtt-http-bridge'
 
 # NOTE: there is deliberately no mocking in these tests,
-#       a live internet connect is required
+#       a live internet connection is required
 
 set :environment, :test
 
@@ -130,8 +130,8 @@ describe MqttHttpBridge do
       last_response.content_type.should == 'text/plain;charset=utf-8'
     end
 
-    it "should have a response body of 'N bytes'" do
-      last_response.body.should =~ %r[^\d+ bytes$]
+    it "should have a response body of an integer" do
+      last_response.body.should =~ %r[^\d+$]
     end
   end
 
