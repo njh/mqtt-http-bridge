@@ -160,12 +160,12 @@ describe MqttHttpBridge do
       last_response.body.should =~ %r[This simple web application provides a bridge between HTTP]
     end
 
-    it "should contain a link to the 'test' topic" do
-      last_response.body.should =~ %r[<li><a href="test">test</a></li>]
+    it "should contain a link to a topic not starting with a slash" do
+      last_response.body.should =~ %r[<li><a href="\w+">\w+</a></li>]
     end
 
-    it "should contain a link to the '/test' topic" do
-      last_response.body.should =~ %r[<li><a href="%2Ftest">/test</a></li>]
+    it "should contain a link to a topic starting with a slash" do
+      last_response.body.should =~ %r[<li><a href="%2F\w">/\w+</a></li>]
     end
 
     it "should contain a link to the '$SYS/broker/version' topic" do
