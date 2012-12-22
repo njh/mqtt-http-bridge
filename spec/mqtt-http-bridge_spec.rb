@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'mqtt-http-bridge'
 
 # NOTE: there is deliberately no mocking in these tests,
-#       a live internet connect is required
+#       a live internet connection is required
 
 set :environment, :test
 
@@ -130,8 +130,8 @@ describe MqttHttpBridge do
       last_response.content_type.should == 'text/plain;charset=utf-8'
     end
 
-    it "should have a response body of 'N bytes'" do
-      last_response.body.should =~ %r[^\d+ bytes$]
+    it "should have a response body of an integer" do
+      last_response.body.should =~ %r[^\d+$]
     end
   end
 
@@ -160,12 +160,12 @@ describe MqttHttpBridge do
       last_response.body.should =~ %r[This simple web application provides a bridge between HTTP]
     end
 
-    it "should contain a link to the 'test' topic" do
-      last_response.body.should =~ %r[<li><a href="test">test</a></li>]
+    it "should contain a link to a topic not starting with a slash" do
+      last_response.body.should =~ %r[<li><a href="\w+">\w+</a></li>]
     end
 
-    it "should contain a link to the '/test' topic" do
-      last_response.body.should =~ %r[<li><a href="%2Ftest">/test</a></li>]
+    it "should contain a link to a topic starting with a slash" do
+      last_response.body.should =~ %r[<li><a href="%2F\w">/\w+</a></li>]
     end
 
     it "should contain a link to the '$SYS/broker/version' topic" do
