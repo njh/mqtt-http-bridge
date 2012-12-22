@@ -165,7 +165,7 @@ describe MqttHttpBridge do
     end
 
     it "should contain a link to a topic starting with a slash" do
-      last_response.body.should =~ %r[<li><a href="%2F\w">/\w+</a></li>]
+      last_response.body.should =~ %r[<li><a href="%2F\w+">/\w+</a></li>]
     end
 
     it "should contain a link to the '$SYS/broker/version' topic" do
