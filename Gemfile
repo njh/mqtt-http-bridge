@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Note: also see .rbenv-version
-ruby "1.9.3"
+ruby "1.9.2"
 
 gem 'sinatra'
 gem 'mqtt', '>=0.0.7'

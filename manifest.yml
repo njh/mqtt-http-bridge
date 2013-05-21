@@ -10,4 +10,5 @@ applications:
         description: Rack Application
         mem: 128M
     url: ${name}.${target-base}
+    runtime: ruby19
     mem: 128M
