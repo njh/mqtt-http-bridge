@@ -2,7 +2,7 @@
 applications: 
   .: 
     name: m2m-eclipse
-    instances: 2
+    instances: 1
     framework: 
       name: rack
       info: 
