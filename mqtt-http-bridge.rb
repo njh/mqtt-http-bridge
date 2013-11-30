@@ -65,7 +65,13 @@ class MqttHttpBridge < Sinatra::Base
         '"' => "&quot;"
       }
       pattern = /#{Regexp.union(*mapping.keys)}/n
-      string.to_s.gsub(pattern){|c| mapping[c] }
+
+      # Clean up invalid UTF-8 characters
+      utf16 = string.to_s.encode('UTF-16', :undef => :replace, :invalid => :replace, :replace => "")
+      clean = utf16.encode('UTF-8');
+
+      # Now perform escaping
+      clean.gsub(pattern){|c| mapping[c] }
     end
 
     def link_to(title, url=nil, attr={})
