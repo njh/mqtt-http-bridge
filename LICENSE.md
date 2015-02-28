@@ -1,4 +1,5 @@
 The MIT License (MIT)
+=====================
 
 Copyright (c) Nicholas J Humfrey
 
