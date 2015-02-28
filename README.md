@@ -49,5 +49,22 @@ To delete the retained value for a topic:
 
 
 
+
+License
+-------
+
+The ruby mqtt-http-bridge is licensed under the terms of the MIT license.
+See the file LICENSE for details.
+
+
+Contact
+-------
+
+* Author:    Nicholas J Humfrey
+* Email:     njh@aelius.com
+* Twitter:   [@njh](http://twitter.com/njh)
+* Home Page: http://www.aelius.com/njh/
+
+
 [MQTT]:    http://en.wikipedia.org/wiki/MQ_Telemetry_Transport
 [REST]:    http://en.wikipedia.org/wiki/Representational_state_transfer
