@@ -61,7 +61,6 @@ Contact
 -------
 
 * Author:    Nicholas J Humfrey
-* Email:     njh@aelius.com
 * Twitter:   [@njh](http://twitter.com/njh)
 * Home Page: http://www.aelius.com/njh/
 
