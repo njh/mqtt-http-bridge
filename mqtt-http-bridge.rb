@@ -65,7 +65,7 @@ class MqttHttpBridge < Sinatra::Base
         "'" => "&#x27;",
         '"' => "&quot;"
       }
-      pattern = /#{Regexp.union(*mapping.keys)}/n
+      pattern = /#{Regexp.union(*mapping.keys)}/
 
       # Clean up invalid UTF-8 characters
       utf16 = string.to_s.encode('UTF-16', :undef => :replace, :invalid => :replace, :replace => "")
