@@ -65,5 +65,5 @@ Contact
 * Home Page: http://www.aelius.com/njh/
 
 
-[MQTT]:    http://en.wikipedia.org/wiki/MQ_Telemetry_Transport
+[MQTT]:    https://en.wikipedia.org/wiki/MQTT
 [REST]:    http://en.wikipedia.org/wiki/Representational_state_transfer
