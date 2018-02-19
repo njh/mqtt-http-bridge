@@ -90,12 +90,12 @@ class MqttHttpBridge < Sinatra::Base
     erb :index
   end
 
-  get // do
+  get '/*' do
     content_type('text/plain')
     mqtt_get(topic)
   end
 
-  post // do
+  post '/*' do
     content_type('text/plain')
     MQTT::Client.connect(MQTT_OPTS) do |client|
       client.publish(topic, request.body.read, retain=false)
@@ -103,7 +103,7 @@ class MqttHttpBridge < Sinatra::Base
     "OK"
   end
 
-  put // do
+  put '/*' do
     content_type('text/plain')
     MQTT::Client.connect(MQTT_OPTS) do |client|
       client.publish(topic, request.body.read, retain=true)
@@ -111,7 +111,7 @@ class MqttHttpBridge < Sinatra::Base
     "OK"
   end
 
-  delete // do
+  delete '/*' do
     content_type('text/plain')
     MQTT::Client.connect(MQTT_OPTS) do |client|
       client.publish(topic, '', retain=true)
