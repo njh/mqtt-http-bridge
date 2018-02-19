@@ -8,6 +8,7 @@
 require 'rubygems'
 require 'mqtt'
 require 'sinatra'
+require 'timeout'
 
 class MqttHttpBridge < Sinatra::Base
   MQTT_TIMEOUT = 1.0
@@ -21,7 +22,7 @@ class MqttHttpBridge < Sinatra::Base
     MQTT::Client.connect(MQTT_OPTS) do |client|
       client.subscribe(topic)
       begin
-        timeout(MQTT_TIMEOUT) do
+        Timeout.timeout(MQTT_TIMEOUT) do
           topic,message = client.get
           client.disconnect
           return message
@@ -38,7 +39,7 @@ class MqttHttpBridge < Sinatra::Base
       client.subscribe('$SYS/#')
       client.subscribe('#')
       begin
-        timeout(MQTT_TIMEOUT) do
+        Timeout.timeout(MQTT_TIMEOUT) do
           client.get { |topic,message| topics << topic }
         end
       rescue Timeout::Error
