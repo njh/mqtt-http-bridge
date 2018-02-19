@@ -1,15 +1,14 @@
 source "https://rubygems.org"
+ruby File.read('.ruby-version').chomp
 
-# Note: also see .rbenv-version
-ruby "2.1.2"
+gem 'thin'
 
 gem 'sinatra'
 gem 'mqtt', '>=0.0.7'
-gem 'thin'
 
 group :development do
-  gem 'shotgun'
   gem 'rake'
+  gem 'shotgun'
 end
 
 group :test do
