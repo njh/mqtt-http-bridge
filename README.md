@@ -26,7 +26,11 @@ You can then open the bridge in your browser:
 
     http://localhost:1234/
 
+To connect to your own MQTT server:
 
+	Edit the first few lines of `mqtt-http-bridge.rb` to match your server.
+	
+	If you want to use a different port than the default 1883, add `:remote_port => [PORT NUMBER],` under the line with the IP address. Do not put the port number in quotation marks.
 
 Examples using curl
 -------------------
