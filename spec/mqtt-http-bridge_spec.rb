@@ -170,8 +170,13 @@ describe MqttHttpBridge do
     it "should contain a link to the '$SYS/broker/version' topic" do
       expect(last_response.body).to match(%r[<li><a href="%24SYS%2Fbroker%2Fversion">\$SYS/broker/version</a></li>])
     end
-  end
 
+    it "should not have any duplicate <li> lines" do
+      lines = last_response.body.split(/\n+/).select {|line| line.match(/<li>/)}
+      dups = lines.group_by{|e| e}.keep_if{|_, e| e.length > 1}
+      expect(dups).to be_empty
+    end
+  end
 
   context "DELETEing a topic" do
     before :all do

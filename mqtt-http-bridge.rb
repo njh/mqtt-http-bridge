@@ -44,7 +44,7 @@ class MqttHttpBridge < Sinatra::Base
       rescue Timeout::Error
       end
     end
-    return topics
+    return topics.uniq
   end
 
   def topic
