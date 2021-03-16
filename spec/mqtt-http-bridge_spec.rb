@@ -27,15 +27,15 @@ describe MqttHttpBridge do
     end
 
     it "should be successful" do
-      last_response.should be_ok
+      expect(last_response).to be_ok
     end
 
     it "should have a response of type text/plain" do
-      last_response.content_type.should == 'text/plain;charset=utf-8'
+      expect(last_response.content_type).to eq('text/plain;charset=utf-8')
     end
 
     it "should have a response body of 'OK'" do
-      last_response.body.should == 'OK'
+      expect(last_response.body).to eq('OK')
     end
   end
 
@@ -45,15 +45,15 @@ describe MqttHttpBridge do
     end
 
     it "should be successful" do
-      last_response.should be_ok
+      expect(last_response).to be_ok
     end
 
     it "should have a response of type text/plain" do
-      last_response.content_type.should == 'text/plain;charset=utf-8'
+      expect(last_response.content_type).to eq('text/plain;charset=utf-8')
     end
 
     it "should have a response body of 'OK'" do
-      last_response.body.should == 'OK'
+      expect(last_response.body).to eq('OK')
     end
   end
 
@@ -65,18 +65,18 @@ describe MqttHttpBridge do
     end
 
     it "should successfully publish a retained message to topic using PUT" do
-      @put_response.should be_ok
-      @put_response.body.should == 'OK'
+      expect(@put_response).to be_ok
+      expect(@put_response.body).to eq('OK')
     end
 
     it "should successfully publish a non-retained message to topic using POST" do
-      @post_response.should be_ok
-      @post_response.body.should == 'OK'
+      expect(@post_response).to be_ok
+      expect(@post_response.body).to eq('OK')
     end
 
     it "should successfully GET the retained message afterwards" do
-      @get_response.should be_ok
-      @get_response.body.should == TEST_MESSAGE_1
+      expect(@get_response).to be_ok
+      expect(@get_response.body).to eq(TEST_MESSAGE_1)
     end
   end
 
@@ -87,15 +87,15 @@ describe MqttHttpBridge do
     end
 
     it "should be successful" do
-      last_response.should be_ok
+      expect(last_response).to be_ok
     end
 
     it "should have a response of type text/plain" do
-      last_response.content_type.should == 'text/plain;charset=utf-8'
+      expect(last_response.content_type).to eq('text/plain;charset=utf-8')
     end
 
     it "should have a response body of 'OK'" do
-      last_response.body.should == TEST_MESSAGE_1
+      expect(last_response.body).to eq(TEST_MESSAGE_1)
     end
   end
 
@@ -105,15 +105,15 @@ describe MqttHttpBridge do
     end
 
     it "should be successful" do
-      last_response.should be_ok
+      expect(last_response).to be_ok
     end
 
     it "should have a response of type text/plain" do
-      last_response.content_type.should == 'text/plain;charset=utf-8'
+      expect(last_response.content_type).to eq('text/plain;charset=utf-8')
     end
 
     it "should have a response body of 'OK'" do
-      last_response.body.should == TEST_MESSAGE_2
+      expect(last_response.body).to eq(TEST_MESSAGE_2)
     end
   end
 
@@ -124,13 +124,13 @@ describe MqttHttpBridge do
     end
 
     it "should successfully publish a retained message to topic using PUT" do
-      @put_response.should be_ok
-      @put_response.body.should == 'OK'
+      expect(@put_response).to be_ok
+      expect(@put_response.body).to eq('OK')
     end
 
     it "should successfully GET the retained message afterwards" do
-      @get_response.should be_ok
-      @get_response.body.should == TEST_MESSAGE_1
+      expect(@get_response).to be_ok
+      expect(@get_response.body).to eq(TEST_MESSAGE_1)
     end
   end
 
@@ -140,35 +140,35 @@ describe MqttHttpBridge do
     end
 
     it "should be successful" do
-      last_response.should be_ok
+      expect(last_response).to be_ok
     end
 
     it "should be of type text/html" do
-      last_response.content_type.should == 'text/html;charset=utf-8'
+      expect(last_response.content_type).to eq('text/html;charset=utf-8')
     end
 
     it "should be cachable" do
-      last_response.headers['Cache-Control'].should =~ /max-age=([1-9]+)/
+      expect(last_response.headers['Cache-Control']).to match(/max-age=([1-9]+)/)
     end
 
     it "should contain a page title" do
-      last_response.body.should =~ %r[<h1>HTTP to MQTT Bridge for (.+)</h1>]
+      expect(last_response.body).to match(%r[<h1>HTTP to MQTT Bridge for (.+)</h1>])
     end
 
     it "should contain the text from the README" do
-      last_response.body.should =~ %r[This simple web application provides a bridge between HTTP]
+      expect(last_response.body).to match(%r[This simple web application provides a bridge between HTTP])
     end
 
     it "should contain a link to a topic not starting with a slash" do
-      last_response.body.should =~ %r[<li><a href="\w+">\w+</a></li>]
+      expect(last_response.body).to match(%r[<li><a href="\w+">\w+</a></li>])
     end
 
     it "should contain a link to a topic starting with a slash" do
-      last_response.body.should =~ %r[<li><a href="%2F\w+">/\w+</a></li>]
+      expect(last_response.body).to match(%r[<li><a href="%2F\w+">/\w+</a></li>])
     end
 
     it "should contain a link to the '$SYS/broker/version' topic" do
-      last_response.body.should =~ %r[<li><a href="%24SYS%2Fbroker%2Fversion">\$SYS/broker/version</a></li>]
+      expect(last_response.body).to match(%r[<li><a href="%24SYS%2Fbroker%2Fversion">\$SYS/broker/version</a></li>])
     end
   end
 
@@ -182,22 +182,22 @@ describe MqttHttpBridge do
     end
 
     it "should successfully create the topic to be deleted" do
-      @put_response.should be_ok
-      @put_response.body.should == 'OK'
+      expect(@put_response).to be_ok
+      expect(@put_response.body).to eq('OK')
     end
 
     it "should successfully GET back the topic to be deleted" do
-      @get1_response.should be_ok
-      @get1_response.body.should == TEST_MESSAGE_1
+      expect(@get1_response).to be_ok
+      expect(@get1_response.body).to eq(TEST_MESSAGE_1)
     end
 
     it "should successfully delete the topic" do
-      @delete_response.should be_ok
-      @delete_response.body.should == 'OK'
+      expect(@delete_response).to be_ok
+      expect(@delete_response.body).to eq('OK')
     end
 
     it "should return 404 after deleting the topic" do
-      @get2_response.should be_not_found
+      expect(@get2_response).to be_not_found
     end
   end
 

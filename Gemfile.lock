@@ -47,7 +47,7 @@ DEPENDENCIES
   mqtt (>= 0.0.7)
   rack-test
   rake
-  rspec (>= 2.7.0)
+  rspec (>= 3.10.0)
   shotgun
   sinatra
   thin
