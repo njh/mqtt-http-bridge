@@ -11,10 +11,9 @@ require 'sinatra'
 require 'timeout'
 
 class MqttHttpBridge < Sinatra::Base
-  MQTT_TIMEOUT = 1.0
   MQTT_OPTS = {
     :remote_host => 'test.mosquitto.org',
-    :keep_alive => 2,
+    :keep_alive => 4,
     :clean_session => true
   }
 
@@ -22,7 +21,7 @@ class MqttHttpBridge < Sinatra::Base
     MQTT::Client.connect(MQTT_OPTS) do |client|
       client.subscribe(topic)
       begin
-        Timeout.timeout(MQTT_TIMEOUT) do
+        Timeout.timeout(2.5) do
           topic,message = client.get
           client.disconnect
           return message
@@ -39,7 +38,7 @@ class MqttHttpBridge < Sinatra::Base
       client.subscribe('$SYS/#')
       client.subscribe('#')
       begin
-        Timeout.timeout(MQTT_TIMEOUT) do
+        Timeout.timeout(1.0) do
           client.get { |topic,message| topics << topic }
         end
       rescue Timeout::Error
