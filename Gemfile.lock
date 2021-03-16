@@ -6,7 +6,7 @@ GEM
     eventmachine (1.2.7)
     mqtt (0.5.0)
     mustermann (1.0.3)
-    rack (2.0.6)
+    rack (2.2.3)
     rack-protection (2.0.4)
       rack
     rack-test (1.1.0)
