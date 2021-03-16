@@ -23,7 +23,7 @@ describe MqttHttpBridge do
 
   context "PUTing to a simple topic name" do
     before :all do
-      put '/test', TEST_MESSAGE_1
+      put '/test-mhb', TEST_MESSAGE_1
     end
 
     it "should be successful" do
@@ -59,9 +59,9 @@ describe MqttHttpBridge do
 
   context "POSTing to a simple topic name" do
     before :all do
-      @put_response = put('/test', TEST_MESSAGE_1)
-      @post_response = post('/test', TEST_MESSAGE_2)
-      @get_response = get('/test')
+      @put_response = put('/test-mhb', TEST_MESSAGE_1)
+      @post_response = post('/test-mhb', TEST_MESSAGE_2)
+      @get_response = get('/test-mhb')
     end
 
     it "should successfully publish a retained message to topic using PUT" do
@@ -83,7 +83,7 @@ describe MqttHttpBridge do
 
   context "GETing a simple topic name" do
     before :all do
-      get '/test'
+      get '/test-mhb'
     end
 
     it "should be successful" do
