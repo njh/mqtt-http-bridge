@@ -119,19 +119,18 @@ describe MqttHttpBridge do
 
   context "GETing a topic with a space in the name" do
     before :all do
-      get '$SYS/broker/heap/current%20size'
+      @put_response = put('/test%20mhb%20space', TEST_MESSAGE_1)
+      @get_response = get('/test%20mhb%20space')
     end
 
-    it "should be successful" do
-      last_response.should be_ok
+    it "should successfully publish a retained message to topic using PUT" do
+      @put_response.should be_ok
+      @put_response.body.should == 'OK'
     end
 
-    it "should have a response of type text/plain" do
-      last_response.content_type.should == 'text/plain;charset=utf-8'
-    end
-
-    it "should have a response body of an integer" do
-      last_response.body.should =~ %r[^\d+$]
+    it "should successfully GET the retained message afterwards" do
+      @get_response.should be_ok
+      @get_response.body.should == TEST_MESSAGE_1
     end
   end
 
